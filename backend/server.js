@@ -8,6 +8,12 @@ const PORT = process.env.PORT || 8080
 const cors = require('cors')
 app.use(cors())
 
+const path = require('path')
+app.use(express.static(path.join(__dirname, './frontend/build')))
+app.use('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './frontend/build/index.html'))
+})
+
 // files
 const passport = require('./controllers/auth')
 const userRoutes = require('./routes/userRoutes')
